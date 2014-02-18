@@ -23,12 +23,10 @@ using namespace std;
 class OpenTrain{
 public:
 	OpenTrain();
-	int Count = 0; //To count elements from 1st class
-	vector<string> Indexes; //Indexes of all images to open
 
-	int Nb_Data_First_Class = Count;
-	int Nb_Data_Second_Class = Indexes.size() - Count;
-	int Nb_Files = Indexes.size();
+	int Nb_Data_First_Class;
+	int Nb_Data_Second_Class;
+	int Nb_Files;
 
 	Mat Data; //Data will contain the dataset,
 	Mat Labels; // Labels the class values.
@@ -36,6 +34,10 @@ public:
 	void OpenText(string, string, string);
 	void OpenImages(string, string, int, int, int, int);
 	void Open(string, string, string, string, string, int, int, int, int);
+
+	//private:
+	int Count = 0; //To count elements from 1st class
+	vector<string> Indexes; //Indexes of all images to open
 	
 };
 
@@ -43,7 +45,7 @@ class OpenTest{
 public:
 	OpenTest();
 
-	int Nb_Files = Indexes.size();
+	int Nb_Files;
 
 	Mat Data;
 	Mat Labels;

@@ -56,6 +56,10 @@ void OpenTrain::OpenImages(string Directory_Images_Files, string Format,
 	int Width_Zone, int Height_Zone, 
 	int LabVal_1, int LabVal_2){
 
+	Nb_Data_First_Class = Count;
+	Nb_Data_Second_Class = Indexes.size() - Count;
+	Nb_Files = Indexes.size();
+
 	int TotalSz_Zone = Width_Zone*Height_Zone;
 	Data = Mat::zeros(Nb_Files, TotalSz_Zone, CV_32FC1);
 	Labels = Mat::zeros(Nb_Files, 1, CV_32FC1);
@@ -129,6 +133,10 @@ void OpenTrain::Open(string Directory_Text_Files, string Directory_Images_Files,
 
 //Version of Open, that only uses console for input values.
 void OpenAll::Open_ConsoleVersion(){
+
+	cout << "========================================" << endl;
+	cout << "    SVM IMAGE CLASSIFICATION PROGRAM." << endl;
+	cout << "========================================" << endl;
 	cout << "----------------------------------------" << endl;
 	cout << "Common directories and parameters" << endl;
 	cout << "----------------------------------------" << endl;
@@ -191,6 +199,8 @@ void OpenTest::OpenText(string Directory_Text_Files, string File_Test){
 void OpenTest::OpenImages(string Directory_Images_Files, string Format,
 	int Width_Zone, int Height_Zone,
 	int LabVal_Test){
+
+	Nb_Files = Indexes.size();
 
 	int TotalSz_Zone = Width_Zone*Height_Zone;
 	Data = Mat::zeros(Nb_Files, TotalSz_Zone, CV_32FC1);

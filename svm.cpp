@@ -21,11 +21,6 @@ SVMModel::SVMModel(){}
 
 void SVMModel::SVM_ConsoleVersion(OpenAll OA){
 
-	OA.OTr.Data.convertTo(OA.OTr.Data, CV_32FC1);
-	OA.OTr.Labels.convertTo(OA.OTr.Labels, CV_32FC1);
-	OA.OTe.Data.convertTo(OA.OTe.Data, CV_32FC1);
-	OA.OTe.Labels.convertTo(OA.OTe.Labels, CV_32FC1);
-
 	CvParamGrid grid_C;
 	CvParamGrid grid_Gamma;
 
@@ -44,7 +39,7 @@ void SVMModel::SVM_ConsoleVersion(OpenAll OA){
 		cout << "----------------------------------------" << endl;
 		cout << "Custom SVM" << endl;
 		cout << "----------------------------------------" << endl;
-		cout << "***** KERNEL TYPES **** \n 0 : Linear. 1 : Polynomial. \n 2 : RBF. 3 : Sigmoid.\n" << endl;
+		cout << "***** KERNEL TYPES **** \n 0 : Linear \n 1 : Polynomial \n 2 : RBF \n 3 : Sigmoid" << "\n" << endl;
 
 		cout << "Please enter values for the following parameters. If not applicable, enter 0." << endl;
 		cout << "- Kernel type :" << endl;
@@ -79,26 +74,26 @@ void SVMModel::SVM_ConsoleVersion(OpenAll OA){
 		cout << "Parameter C : Please enter exponent for min. grid limit." << endl;
 		int p = GetLine_Int();
 		grid_C.min_val = pow(10, p);
-		cout << ">>>> Min. grid limit will be " << pow(10, p) << endl;
+		cout << "---> Min. grid limit will be " << pow(10, p) << endl;
 		cout << "Parameter C : Please enter exponent for max. grid limit." << endl;
 		int k = GetLine_Int();
 		grid_C.max_val = pow(10, k) + 1e-10;
-		cout << ">>>> Max. grid limit will be " << pow(10, k)+1e-10 << endl;
+		cout << "---> Max. grid limit will be " << pow(10, k)+1e-10 << endl;
 		grid_C.step = 10;
 
 		cout << "Parameter Gamma : Please enter exponent for min. grid limit." << endl;
 		int m = GetLine_Int();
 		grid_Gamma.min_val = pow(10, m);
-		cout << ">>>> Min. grid limit will be " << pow(10,m) << endl;
+		cout << "---> Min. grid limit will be " << pow(10,m) << endl;
 		cout << "Parameter Gamma : Please enter exponent for max. grid limit." << endl;
 		int n = GetLine_Int();
 		grid_Gamma.max_val = pow(10, n) + 1e-10;
-		cout << ">>>> Max. grid limit will be " << pow(10, n) + 1e-10 << endl;
+		cout << "---> Max. grid limit will be " << pow(10, n) + 1e-10 << endl;
 		grid_Gamma.step = 10;
 
 		for (int j = 1; j < Iterations + 1; j++)
 		{
-			cout << "--STEP " << j << "--" << endl;
+			cout << "\n"<<"--STEP " << j << "--" << endl;
 			CvSVMParams params;
 			clock_t begin = clock();
 
