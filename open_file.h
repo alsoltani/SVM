@@ -23,7 +23,9 @@ using namespace std;
 class OpenTrain{
 public:
 	OpenTrain();
-	
+	int Count = 0; //To count elements from 1st class
+	vector<string> Indexes; //Indexes of all images to open
+
 	int Nb_Data_First_Class = Count;
 	int Nb_Data_Second_Class = Indexes.size() - Count;
 	int Nb_Files = Indexes.size();
@@ -34,9 +36,7 @@ public:
 	void OpenText(string, string, string);
 	void OpenImages(string, string, int, int, int, int);
 	void Open(string, string, string, string, string, int, int, int, int);
-private:
-	vector<string> Indexes; //Indexes of all images to open
-	int Count = 0; //To count elements from 1st class
+	
 };
 
 class OpenTest{

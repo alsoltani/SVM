@@ -21,8 +21,11 @@ SVMModel::SVMModel(){}
 
 void SVMModel::SVM_ConsoleVersion(OpenAll OA){
 
-	Mat TrainingData = OA.OTr.Data;
-	Mat TrainingLabels = OA.OTr.Labels;
+	OA.OTr.Data.convertTo(OA.OTr.Data, CV_32FC1);
+	OA.OTr.Labels.convertTo(OA.OTr.Labels, CV_32FC1);
+	OA.OTe.Data.convertTo(OA.OTe.Data, CV_32FC1);
+	OA.OTe.Labels.convertTo(OA.OTe.Labels, CV_32FC1);
+
 	CvParamGrid grid_C;
 	CvParamGrid grid_Gamma;
 
@@ -79,8 +82,8 @@ void SVMModel::SVM_ConsoleVersion(OpenAll OA){
 		cout << ">>>> Min. grid limit will be " << pow(10, p) << endl;
 		cout << "Parameter C : Please enter exponent for max. grid limit." << endl;
 		int k = GetLine_Int();
-		grid_C.min_val = pow(10, k) + 1e-10;
-		cout << ">>>> Min. grid limit will be " << pow(10, k)+1e-10 << endl;
+		grid_C.max_val = pow(10, k) + 1e-10;
+		cout << ">>>> Max. grid limit will be " << pow(10, k)+1e-10 << endl;
 		grid_C.step = 10;
 
 		cout << "Parameter Gamma : Please enter exponent for min. grid limit." << endl;
@@ -89,8 +92,8 @@ void SVMModel::SVM_ConsoleVersion(OpenAll OA){
 		cout << ">>>> Min. grid limit will be " << pow(10,m) << endl;
 		cout << "Parameter Gamma : Please enter exponent for max. grid limit." << endl;
 		int n = GetLine_Int();
-		grid_Gamma.min_val = pow(10, n) + 1e-10;
-		cout << ">>>> Min. grid limit will be " << pow(10, n) + 1e-10 << endl;
+		grid_Gamma.max_val = pow(10, n) + 1e-10;
+		cout << ">>>> Max. grid limit will be " << pow(10, n) + 1e-10 << endl;
 		grid_Gamma.step = 10;
 
 		for (int j = 1; j < Iterations + 1; j++)
@@ -110,12 +113,12 @@ void SVMModel::SVM_ConsoleVersion(OpenAll OA){
 }
 void SVMModel::SVM_Train_Custom(OpenTrain OTr, CvSVMParams params)
 {
+
 	svm.train(OTr.Data, OTr.Labels, Mat(), Mat(), params);
 	PrintParam(params);
 }
 
 void SVMModel::SVM_Train_Optimal(OpenTrain OTr, CvParamGrid grid_C, CvParamGrid grid_Gamma, CvSVMParams params, int j){
-	
 
 		//---------------------------------------------------Training the model--------------------------------------------------
 
@@ -134,6 +137,7 @@ void SVMModel::SVM_Train_Optimal(OpenTrain OTr, CvParamGrid grid_C, CvParamGrid 
 	}
 
 void SVMModel::SVM_Test(OpenTrain OTr, OpenTest OTe){
+
 	Mat Results; // Empty mat used for classification output
 	int CountMisclass(0); //For missclassification
 

@@ -22,6 +22,7 @@ int main(){
 	OpenAll OA;
 	SVMModel SVMM;
 	OA.Open_ConsoleVersion();
+
 	SVMM.SVM_ConsoleVersion(OA);
 	return 0;
 	system("PAUSE");
